@@ -1,0 +1,111 @@
+@page "/adults"
+@using global::Models
+@using FileData
+@using System.Reflection.Metadata
+<h3>Adults</h3>
+
+<label>Search by First Name: &nbsp;</label>
+<input type="text" placeholder="First Name" @bind-value="searchWord"/>
+<br>
+<button class="btn btn-primary" @onclick="Search">Search</button>
+<br>
+<button class="btn btn-primary" @onclick="loadEverything">Load Everyone</button>
+
+
+@if (_adults == null) {
+    <p>
+        <em>Loading...</em>
+    </p>
+} else {
+    <table class="table">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>ID</th>
+            <th>Hair Color</th>
+            <th>Eye Color</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Sex</th>
+            
+            
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var adultList in searchResult) {
+            <tr>
+                <td>@adultList.FirstName</td>
+                <td>@adultList.LastName</td>
+                <td>@adultList.Id</td>
+                <td>@adultList.HairColor</td>
+                <td>@adultList.EyeColor</td>
+                <td>@adultList.Age</td>
+                <td>@adultList.Weight</td>
+                <td>@adultList.Height</td>
+                <td>@adultList.Sex</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    public string searchWord = "";
+    FileContext adultFromJson = new FileContext();
+    public IList<Adult> _adults;
+
+    public IList<Adult> searchResult;
+    private int resultAmount = 0;
+
+    public void Search()
+    {
+        if (searchWord == "")
+        {
+            
+        } else {
+        resultAmount = 0;
+        _adults = adultFromJson.Adults;
+
+        IList < Adult > resultList = new List<Adult>();
+
+        Console.WriteLine("Pre loop");
+        for (int i = 0; i < adultFromJson.Adults.Count; i++)
+        {
+            Console.WriteLine("In loop");
+            if (_adults[i].FirstName.Contains(searchWord))
+            {
+                Console.WriteLine("In if");
+                resultList.Add(_adults[i]);
+                resultAmount++;
+            }
+        }
+
+        
+
+
+        searchResult = resultList;
+        Console.Write("Search done");
+    }
+    }
+
+    
+
+    public void loadEverything()
+    {
+        try
+        {
+            _adults = adultFromJson.Adults;
+            searchResult = _adults;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+
+
+}
