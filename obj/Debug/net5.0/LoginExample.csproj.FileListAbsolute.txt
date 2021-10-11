@@ -63,3 +63,5 @@
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/bin/Debug/net5.0/families.json
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Pages/AdultCreation.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Pages/AdultCreation.razor.g.cs
+/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Pages/LoginTab.razor.g.cs
+/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Pages/LoginTab.razor.g.cs

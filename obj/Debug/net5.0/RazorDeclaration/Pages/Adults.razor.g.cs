@@ -105,8 +105,23 @@ using System.Reflection.Metadata;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 58 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/Adults.razor"
+#line 60 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/Adults.razor"
        
+    
+    //De 2 nederstående funktioner, køres når siden åbnes
+    Task SomeStartupTask()
+    {
+    // Do some task based work
+        return Task.CompletedTask;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        loadEverything();
+        await SomeStartupTask();
+    }
+    
+    
     public string searchWord = "";
     FileContext adultFromJson = new FileContext();
     public IList<Adult> _adults;

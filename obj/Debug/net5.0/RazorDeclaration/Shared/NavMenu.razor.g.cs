@@ -82,6 +82,13 @@ using LoginExample.Pages;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Shared/NavMenu.razor"
+using LoginExample.Authentication;
+
+#line default
+#line hidden
+#nullable disable
     public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -90,7 +97,7 @@ using LoginExample.Pages;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 52 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Shared/NavMenu.razor"
+#line 76 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Shared/NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
@@ -101,9 +108,20 @@ using LoginExample.Pages;
     }
 
 
+    public async Task PerformLogout() {
+        
+        try {
+            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            //NavigationManager.NavigateTo("/");
+        } catch (Exception e) { }
+    }
+
+
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
     }
 }
 #pragma warning restore 1591

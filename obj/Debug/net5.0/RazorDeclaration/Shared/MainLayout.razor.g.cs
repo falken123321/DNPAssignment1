@@ -90,7 +90,7 @@ using LoginComponent;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 23 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Shared/MainLayout.razor"
+#line 25 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Shared/MainLayout.razor"
        
 
     [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
@@ -101,7 +101,7 @@ using LoginComponent;
         var user = (await AuthStat).User;
         if(!user.Identity.IsAuthenticated)
         {
-            NavigationManager.NavigateTo($"/Login");
+            NavigationManager.NavigateTo($"/");
             // NavigationManager.NavigateTo($"/Login?returnUrl={Uri.EscapeDataString(NavigationManager.Uri)}");
         }
     }

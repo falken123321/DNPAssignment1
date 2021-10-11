@@ -38,7 +38,8 @@ public class Startup {
             
             options.AddPolicy("MustBeTeacher",  a => 
                 a.RequireAuthenticatedUser().RequireClaim("Role", "Teacher"));
-            
+
+
             options.AddPolicy("SecurityLevel2", policy =>
                 policy.RequireAuthenticatedUser().RequireAssertion(context => {
                     Claim levelClaim = context.User.FindFirst(claim => claim.Type.Equals("Level"));

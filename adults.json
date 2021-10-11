@@ -253,5 +253,20 @@
     "Weight": 200,
     "Height": 130,
     "Sex": "M"
+  },
+  {
+    "JobTitle": {
+      "JobTitle": "Studerende",
+      "Salary": 5000
+    },
+    "Id": 0,
+    "FirstName": "Kasper",
+    "LastName": "Mikkelsen",
+    "HairColor": "Gr\u00E5",
+    "EyeColor": "Bl\u00E5",
+    "Age": 21,
+    "Weight": 90,
+    "Height": 185,
+    "Sex": "M"
   }
 ]
