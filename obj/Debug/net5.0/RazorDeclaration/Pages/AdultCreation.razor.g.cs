@@ -98,21 +98,41 @@ using global::Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 41 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/AdultCreation.razor"
+#line 49 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/AdultCreation.razor"
        
     private string FirstName, LastName, HairColor, EyeColor, Sex;
     private int Age, Height, Id;
     private float Weight;
+
+
+    private string jobTitleText;
+    private int salary;
     FileContext adultFromJson = new FileContext();
-    
+
+   
     
     public void submit()
     {
+        Adult tempA = new Adult();
+        tempA.Id = Id;
+        tempA.FirstName = FirstName;
+        tempA.LastName = LastName;
+        tempA.HairColor = HairColor;
+        tempA.EyeColor = EyeColor;
+        tempA.Age = Age;
+        tempA.Weight = Weight;
+        tempA.Height = Height;
+        tempA.Sex = Sex;
+
+        Job tempJob = new Job();
+        tempJob.JobTitle = jobTitleText;
+        tempJob.Salary = salary;
+        tempA.JobTitle = tempJob;
         try
         {
             Id = adultFromJson.Adults.Count;
-
-            adultFromJson.Adults.Add(new Adult(Id,FirstName,LastName,HairColor,EyeColor,Age,Weight,Height,Sex));
+            
+            adultFromJson.Adults.Add(tempA);
             
             adultFromJson.SaveChanges();
 
@@ -132,9 +152,6 @@ using global::Models;
             throw;
         }
     }
-    
-
-    
 
 #line default
 #line hidden

@@ -225,27 +225,33 @@
     "Sex": "M"
   },
   {
-    "JobTitle": null,
-    "Id": 15,
-    "FirstName": "Kasper ",
-    "LastName": "Mikkelsen",
-    "HairColor": "Bl\u00E5",
-    "EyeColor": "Lila",
-    "Age": 18,
-    "Weight": 88,
-    "Height": 180,
+    "JobTitle": {
+      "JobTitle": null,
+      "Salary": 0
+    },
+    "Id": 0,
+    "FirstName": "Kasper",
+    "LastName": "Falk",
+    "HairColor": "Brunt",
+    "EyeColor": "Bl\u00E5",
+    "Age": 21,
+    "Weight": 90,
+    "Height": 185,
     "Sex": "M"
   },
   {
-    "JobTitle": null,
-    "Id": 16,
+    "JobTitle": {
+      "JobTitle": "Nothing",
+      "Salary": 34
+    },
+    "Id": 0,
     "FirstName": "Morten",
-    "LastName": "Jensen",
-    "HairColor": "Hvid",
-    "EyeColor": "Sort",
-    "Age": 21,
-    "Weight": 40,
-    "Height": 190,
+    "LastName": "Nielsen",
+    "HairColor": "Bl\u00E5",
+    "EyeColor": "Gr\u00F8n",
+    "Age": 19,
+    "Weight": 200,
+    "Height": 130,
     "Sex": "M"
   }
 ]

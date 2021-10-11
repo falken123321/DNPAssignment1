@@ -90,7 +90,7 @@ using LoginComponent;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 21 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Shared/MainLayout.razor"
+#line 23 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Shared/MainLayout.razor"
        
 
     [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }

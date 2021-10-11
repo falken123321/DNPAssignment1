@@ -90,7 +90,7 @@ using LoginExample.Pages;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 51 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Shared/NavMenu.razor"
+#line 52 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Shared/NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
