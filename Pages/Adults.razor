@@ -1,7 +1,8 @@
 @page "/adults"
 @using global::Models
-@using FileData
+
 @using System.Reflection.Metadata
+@using System.Text.Json
 <h3>Adults</h3>
 
 <label>Search by First Name: &nbsp;</label>
@@ -10,7 +11,7 @@
 <button class="btn btn-primary" @onclick="Search">Search</button>
 <br>
 <button class="btn btn-primary" @onclick="loadEverything">Load Everyone</button>
-
+<button class="btn btn-primary" @onclick="FetchAdultsAsync">Fetch</button>
 
 @if (_adults == null) {
     <p>
@@ -38,19 +39,19 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var adultList in searchResult) {
+        @foreach (var adultList in _adults) {
             <tr>
-                <td>@adultList.FirstName</td>
-                <td>@adultList.LastName</td>
-                <td>@adultList.Id</td>
-                <td>@adultList.HairColor</td>
-                <td>@adultList.EyeColor</td>
-                <td>@adultList.Age</td>
-                <td>@adultList.Weight</td>
-                <td>@adultList.Height</td>
-                <td>@adultList.Sex</td>
-                <td>@adultList.JobTitle.JobTitle</td>
-                <td>@adultList.JobTitle.Salary</td>
+                <td>@adultList.firstName</td>
+                <td>@adultList.lastName</td>
+                <td>@adultList.id</td>
+                <td>@adultList.hairColor</td>
+                <td>@adultList.eyeColor</td>
+                <td>@adultList.age</td>
+                <td>@adultList.weight</td>
+                <td>@adultList.height</td>
+                <td>@adultList.sex</td>
+                <td>@adultList.jobTitle.jobTitle</td>
+                <td>@adultList.jobTitle.salary</td>
             </tr>
         }
         </tbody>
@@ -68,34 +69,31 @@
 
     protected override async Task OnInitializedAsync()
     {
-        loadEverything();
+        await FetchAdultsAsync();
         await SomeStartupTask();
     }
     
     
     public string searchWord = "";
-    FileContext adultFromJson = new FileContext();
     public IList<Adult> _adults;
-
-    public IList<Adult> searchResult;
     private int resultAmount = 0;
 
-    public void Search()
+    public async void Search()
     {
         if (searchWord == "")
         {
             
         } else {
         resultAmount = 0;
-        _adults = adultFromJson.Adults;
+            _adults =  FetchAdultsAsync().Result;
 
         IList < Adult > resultList = new List<Adult>();
 
         Console.WriteLine("Pre loop");
-        for (int i = 0; i < adultFromJson.Adults.Count; i++)
+        for (int i = 0; i < FetchAdultsAsync().Result.Count; i++)
         {
             Console.WriteLine("In loop");
-            if (_adults[i].FirstName.Contains(searchWord))
+            if (_adults[i].firstName.Contains(searchWord))
             {
                 Console.WriteLine("In if");
                 resultList.Add(_adults[i]);
@@ -103,22 +101,21 @@
             }
         }
 
-        
-
-
-        searchResult = resultList;
+            
+        _adults = resultList;
         Console.Write("Search done");
     }
     }
 
     
 
-    public void loadEverything()
+    public async void loadEverything()
     {
         try
         {
-            _adults = adultFromJson.Adults;
-            searchResult = _adults;
+            await FetchAdultsAsync();
+    
+
         }
         catch (Exception e)
         {
@@ -127,6 +124,26 @@
         }
     }
 
+    public async Task<List<Adult>> FetchAdultsAsync()
+    {
+        HttpClient client = new HttpClient();
+        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:5005/Adult");
 
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+        }
 
+        string result = await responseMessage.Content.ReadAsStringAsync();
+
+        List<Adult> adults2 = JsonSerializer.Deserialize<List < Adult >>  (result, new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        });
+
+        
+        _adults = adults2;
+        Console.WriteLine("Done fetching");
+        return adults2;
+    } 
 }

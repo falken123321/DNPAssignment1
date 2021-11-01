@@ -20,7 +20,6 @@
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Pages/FetchData.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Pages/Index.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Pages/Login.razor.g.cs
-/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Pages/SecurityLevel.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Pages/VIA.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Shared/MainLayout.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Shared/NavMenu.razor.g.cs
@@ -36,7 +35,6 @@
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Pages/FetchData.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Pages/Index.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Pages/Login.razor.g.cs
-/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Pages/SecurityLevel.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Pages/VIA.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Shared/MainLayout.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Shared/NavMenu.razor.g.cs
@@ -59,7 +57,6 @@
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/LoginExample.csproj.CopyComplete
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Pages/Adults.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Pages/Adults.razor.g.cs
-/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/bin/Debug/net5.0/adults.json
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/bin/Debug/net5.0/families.json
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/RazorDeclaration/Pages/AdultCreation.razor.g.cs
 /Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/obj/Debug/net5.0/Razor/Pages/AdultCreation.razor.g.cs

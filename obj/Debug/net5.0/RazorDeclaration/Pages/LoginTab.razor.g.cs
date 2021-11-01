@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace LoginExample.Pages
+namespace LoginComponent2
 {
     #line hidden
     using System;
@@ -76,28 +76,42 @@ using LoginExample.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/Adults.razor"
-using global::Models;
+#line 4 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/LoginTab.razor"
+using LoginExample.Authentication;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/Adults.razor"
-using System.Reflection.Metadata;
+#line 5 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/LoginTab.razor"
+using Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/Adults.razor"
+#line 6 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/LoginTab.razor"
 using System.Text.Json;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/adults")]
-    public partial class Adults : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 7 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/LoginTab.razor"
+using System.Net.Http.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/LoginTab.razor"
+using LoginExample.Models;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/login")]
+    public partial class LoginTab : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -105,75 +119,39 @@ using System.Text.Json;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 61 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/Adults.razor"
+#line 42 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/LoginTab.razor"
        
-    
-    //De 2 nederstående funktioner, køres når siden åbnes
-    Task SomeStartupTask()
+private string username;
+private string password;
+private string errorMessage;
+
+public async Task PerformLogin() {
+    errorMessage = "";
+    try {
+    //HttpClient client = new HttpClient();
+
+        //string tmpString = "https://localhost:5005/UserLogin?userName=" + username.ToString() + "&password=" + password.ToString();
+        //HttpResponseMessage responseMessage = await client.GetAsync(tmpString);
+        //Console.WriteLine(responseMessage.IsSuccessStatusCode);
+        //Console.WriteLine(responseMessage.Content.ReadAsStringAsync().Result);
+        
+        //User user = JsonSerializer.Deserialize<User>  (responseMessage.Content.ReadAsStringAsync().Result, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        
+        ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username,password);
+        
+        //Console.WriteLine(user.UserName + user.Password + user.City);
+        
+        username = "";
+        password = "";
+    } catch (Exception e)
     {
-    // Do some task based work
-        return Task.CompletedTask;
+        errorMessage = e.Message;
     }
 
-    protected override async Task OnInitializedAsync()
+    /*try
     {
-        await FetchAdultsAsync();
-        await SomeStartupTask();
-    }
-    
-    
-    public string searchWord = "";
-    public IList<Adult> _adults;
-    private int resultAmount = 0;
-
-    public async void Search()
-    {
-        if (searchWord == "")
-        {
-            
-        } else {
-        resultAmount = 0;
-            _adults =  FetchAdultsAsync().Result;
-
-        IList < Adult > resultList = new List<Adult>();
-
-        Console.WriteLine("Pre loop");
-        for (int i = 0; i < FetchAdultsAsync().Result.Count; i++)
-        {
-            Console.WriteLine("In loop");
-            if (_adults[i].firstName.Contains(searchWord))
-            {
-                Console.WriteLine("In if");
-                resultList.Add(_adults[i]);
-                resultAmount++;
-            }
-        }
-
-            
-        _adults = resultList;
-        Console.Write("Search done");
-    }
-    }
-
-    
-
-    public async void loadEverything()
-    {
-        try
-        {
-            await FetchAdultsAsync();
-    
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
-    public async Task<List<Adult>> FetchAdultsAsync()
-    {
+        https://localhost:5005/UserLogin?userName=Troels&password=123456
+        
         HttpClient client = new HttpClient();
         HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:5005/Adult");
 
@@ -190,14 +168,32 @@ using System.Text.Json;
         });
 
         
-        _adults = adults2;
         Console.WriteLine("Done fetching");
         return adults2;
-    } 
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e);
+        throw;
+    }*/
+}
+
+public async Task PerformLogout() {
+errorMessage = "";
+username = "";
+password = "";
+try {
+((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+NavigationManager.NavigateTo("/");
+} catch (Exception e) { }
+}
+
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
     }
 }
 #pragma warning restore 1591

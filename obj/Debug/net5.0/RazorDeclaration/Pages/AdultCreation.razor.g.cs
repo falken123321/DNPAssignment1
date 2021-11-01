@@ -76,15 +76,22 @@ using LoginExample.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/AdultCreation.razor"
-using FileData;
+#line 3 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/AdultCreation.razor"
+using global::Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/AdultCreation.razor"
-using global::Models;
+#line 4 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/AdultCreation.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/AdultCreation.razor"
+using System.Text;
 
 #line default
 #line hidden
@@ -98,7 +105,7 @@ using global::Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 49 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/AdultCreation.razor"
+#line 51 "/Users/Kasper/Documents/3. Semester/DNP/Assignment 1 - Second try/LoginExample/Pages/AdultCreation.razor"
        
     private string FirstName, LastName, HairColor, EyeColor, Sex;
     private int Age, Height, Id;
@@ -107,35 +114,43 @@ using global::Models;
 
     private string jobTitleText;
     private int salary;
-    FileContext adultFromJson = new FileContext();
+    
 
    
     
     public void submit()
     {
         Adult tempA = new Adult();
-        tempA.Id = Id;
-        tempA.FirstName = FirstName;
-        tempA.LastName = LastName;
-        tempA.HairColor = HairColor;
-        tempA.EyeColor = EyeColor;
-        tempA.Age = Age;
-        tempA.Weight = Weight;
-        tempA.Height = Height;
-        tempA.Sex = Sex;
+        tempA.id = Id;
+        tempA.firstName = FirstName;
+        tempA.lastName = LastName;
+        tempA.hairColor = HairColor;
+        tempA.eyeColor = EyeColor;
+        tempA.age = Age;
+        tempA.weight = Weight;
+        tempA.height = Height;
+        tempA.sex = Sex;
 
         Job tempJob = new Job();
-        tempJob.JobTitle = jobTitleText;
-        tempJob.Salary = salary;
-        tempA.JobTitle = tempJob;
+        tempJob.jobTitle = jobTitleText;
+        tempJob.salary = salary;
+        tempA.jobTitle = tempJob;
         try
         {
-            Id = adultFromJson.Adults.Count;
+            Id = 0;
             
-            adultFromJson.Adults.Add(tempA);
+            //adultFromJson.Adults.Add(tempA);
             
-            adultFromJson.SaveChanges();
+            //adultFromJson.SaveChanges();
 
+            //SEND TO REST API
+            POST(tempA);
+            
+            //DONE SENDING TO REST API
+            
+            
+            
+            
             FirstName = "";
             LastName = "";
             HairColor = "";
@@ -152,6 +167,27 @@ using global::Models;
             throw;
         }
     }
+
+    private async static Task POST(Adult adult)
+    {
+        HttpClient client = new HttpClient();
+
+        string adultAsJson = JsonSerializer.Serialize(adult);
+
+        StringContent content = new StringContent(
+            adultAsJson,
+            Encoding.UTF8,
+            "application/json"
+            );
+
+        HttpResponseMessage response = await client.PostAsync("https://localhost:5005/Adult", content);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+        }
+
+    }
+    
 
 #line default
 #line hidden

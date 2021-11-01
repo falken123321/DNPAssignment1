@@ -1,6 +1,8 @@
 @page "/adultCreation"
-@using FileData
+
 @using global::Models
+@using System.Text.Json
+@using System.Text
 
 <h3>AdultCreation</h3>
 
@@ -54,35 +56,43 @@
 
     private string jobTitleText;
     private int salary;
-    FileContext adultFromJson = new FileContext();
+    
 
    
     
     public void submit()
     {
         Adult tempA = new Adult();
-        tempA.Id = Id;
-        tempA.FirstName = FirstName;
-        tempA.LastName = LastName;
-        tempA.HairColor = HairColor;
-        tempA.EyeColor = EyeColor;
-        tempA.Age = Age;
-        tempA.Weight = Weight;
-        tempA.Height = Height;
-        tempA.Sex = Sex;
+        tempA.id = Id;
+        tempA.firstName = FirstName;
+        tempA.lastName = LastName;
+        tempA.hairColor = HairColor;
+        tempA.eyeColor = EyeColor;
+        tempA.age = Age;
+        tempA.weight = Weight;
+        tempA.height = Height;
+        tempA.sex = Sex;
 
         Job tempJob = new Job();
-        tempJob.JobTitle = jobTitleText;
-        tempJob.Salary = salary;
-        tempA.JobTitle = tempJob;
+        tempJob.jobTitle = jobTitleText;
+        tempJob.salary = salary;
+        tempA.jobTitle = tempJob;
         try
         {
-            Id = adultFromJson.Adults.Count;
+            Id = 0;
             
-            adultFromJson.Adults.Add(tempA);
+            //adultFromJson.Adults.Add(tempA);
             
-            adultFromJson.SaveChanges();
+            //adultFromJson.SaveChanges();
 
+            //SEND TO REST API
+            POST(tempA);
+            
+            //DONE SENDING TO REST API
+            
+            
+            
+            
             FirstName = "";
             LastName = "";
             HairColor = "";
@@ -99,4 +109,25 @@
             throw;
         }
     }
+
+    private async static Task POST(Adult adult)
+    {
+        HttpClient client = new HttpClient();
+
+        string adultAsJson = JsonSerializer.Serialize(adult);
+
+        StringContent content = new StringContent(
+            adultAsJson,
+            Encoding.UTF8,
+            "application/json"
+            );
+
+        HttpResponseMessage response = await client.PostAsync("https://localhost:5005/Adult", content);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+        }
+
+    }
+    
 }
